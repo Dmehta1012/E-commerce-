@@ -26,9 +26,7 @@ export const Product = () => {
     const filtercategory = category === "all" || product.category === category;
     return filterproduct && filtercategory;
   });
-// const addtocart=(products)=>{
-//     if(products.additem===0)
-// }
+ 
 const handlereset=()=>{
     setcategory("all")
 }
