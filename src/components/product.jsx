@@ -7,7 +7,6 @@ import { FaShoppingCart } from "react-icons/fa";
 export const Product = () => {
   const [searchItem, setSearchItem] = useState("");
   const [category, setcategory] = useState("all");
-//   const [additem,setadditem]=useState([])
   const { data, isLoading, isError } = useQuery({
     queryKey: ["products"],
     queryFn: getproduct,
@@ -15,7 +14,9 @@ export const Product = () => {
   const handleInputChange = (e) => {
     setSearchItem(e.target.value);
   };
-
+  const clearfilter=()=>{
+    setcategory("all") 
+  }
   if (isError) return <h1>Error fetching the product</h1>;
   if (isLoading) return <h1>Loading...</h1>;
 
@@ -26,10 +27,6 @@ export const Product = () => {
     const filtercategory = category === "all" || product.category === category;
     return filterproduct && filtercategory;
   });
- 
-const handlereset=()=>{
-    setcategory("all")
-}
   return (
     <>
       <div className="m-10">
@@ -51,7 +48,8 @@ const handlereset=()=>{
         <div className="flex gap-8">
           <div className=" p-3 w-sm h-1/2 border rounded-3xl ">
             <h1 className="text-center text-3xl">Filter</h1>
-            <Button className="mt-2 w-full">Clear all </Button>
+            <Button className="mt-2 w-full"
+            onClick={clearfilter}>Clear all </Button>
             <div className="mt-3 mb-3">
               <div className="">
                 <h1 className="text-2xl  font-bold">Categories</h1>
@@ -64,7 +62,6 @@ const handlereset=()=>{
                 <br />
                 <input
                   type="checkbox"
-
                   checked={category==="jewelery"}
                   onChange={() => setcategory("jewelery")}
                 />
